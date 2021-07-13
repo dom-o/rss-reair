@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+{% if live_count == total_count %}
+This feed was created on {{object.date_created}}. All {{total_count}} items are published. The final item was published on {{ final_item_date }} and the feed will be deleted on {{ delete_date }}.
+{% else %}
+This feed was created on {{ object.date_created }}, and will update with {{object.daily_items}} new items every day. Currently {{ live_count }} of {{ total_count }} items are published. The final item will publish on {{ final_item_date }}<!-- calc date: feed_created_date + (number of items left / items per day) --> and the feed will be deleted a week after that, on {{ delete_date }}.
+{% endif %}
+</p>
+<p>
+The RSS for this feed is at <a href="{{ object.get_rss_url }}">{{object.get_rss_url}}</a>.
+</p>
+<p><a href="{% url 'rss:index' %}">Create some more feeds</a> if you like.</p>
+<h1>{{object.title}}</h1>
+<p>{{object.description}}</p>
+<ul>
+  {% for link in feed_links %}
+    <li><a href="{{link.content_link}}">{{link.content_link}}</a> {% if link.live %} - live{%endif%}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
