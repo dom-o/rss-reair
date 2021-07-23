@@ -5,6 +5,7 @@ from rss.forms import RSSForm
 from django.contrib.syndication.views import Feed
 from django.urls import reverse
 from datetime import timedelta, date
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
@@ -41,7 +42,10 @@ class FeedDetailView(detail.DetailView):
         else:
             context['final_item_date'] = date.today() + timedelta(days=(context['total_count']-context['live_count']) / self.object.daily_items)
 
-        context['feed_links'] = RSSItem.objects.filter(feed=self.object).order_by('-live_date')
+        feed_links = RSSItem.objects.filter(feed=self.object).order_by('-live_date')
+        page_number = self.request.GET.get('page')
+        context['page_obj'] = Paginator(feed_links, 25).get_page(page_number)
+
         context['delete_date'] = context['final_item_date'] + timedelta(days=delete_age)
         return context
 

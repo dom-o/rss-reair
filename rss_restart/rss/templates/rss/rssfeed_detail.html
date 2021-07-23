@@ -5,7 +5,7 @@
 {% if live_count == total_count %}
 This feed was created on {{object.date_created}}. All {{total_count}} items are published. The final item was published on {{ final_item_date }} and the feed will be deleted on {{ delete_date }}.
 {% else %}
-This feed was created on {{ object.date_created }}, and will update with {{object.daily_items}} new items every day. Currently {{ live_count }} of {{ total_count }} items are published. The final item will publish on {{ final_item_date }}<!-- calc date: feed_created_date + (number of items left / items per day) --> and the feed will be deleted a week after that, on {{ delete_date }}.
+This feed was created on {{ object.date_created }}, and will update with {{object.daily_items}} new item{% if object.daily_items > 1 %}s{%endif%} every day. Currently {{ live_count }} of {{ total_count }} items are published. The final item will publish on {{ final_item_date }}<!-- calc date: feed_created_date + (number of items left / items per day) --> and the feed will be deleted a week after that, on {{ delete_date }}.
 {% endif %}
 </p>
 <p>
@@ -15,8 +15,23 @@ The RSS for this feed is at <a href="{{ object.get_rss_url }}">{{object.get_rss_
 <h1>{{object.title}}</h1>
 <p>{{object.description}}</p>
 <ul>
-  {% for link in feed_links %}
-    <li><a href="{{link.content_link}}">{{link.content_link}}</a> {% if link.live %} - live{%endif%}</li>
+  {% for link in page_obj %}
+    <li><a href="{{link.content_link}}">{{link.content_link}}</a> {% if link.live %}<small> -published {{link.live_date}}</small>{%endif%}</li>
   {% endfor %}
 </ul>
+<div>
+    <span>
+        {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span>
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}
