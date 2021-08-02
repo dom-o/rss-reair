@@ -4,7 +4,7 @@ import environ
 from rss_restart.settings.base import *
 
 env = environ.Env(
-    DEBUG=(bool, False))
+    DEBUG=(bool, False)
 )
 
 DEBUG = env('DEBUG')
