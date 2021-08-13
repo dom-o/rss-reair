@@ -1,7 +1,7 @@
 ## Heroku production settings
 
 import environ
-from rss_restart.settings.base import *
+from base import *
 
 env = environ.Env(
     DEBUG=(bool, False)
