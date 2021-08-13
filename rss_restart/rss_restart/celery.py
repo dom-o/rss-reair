@@ -2,7 +2,7 @@ import os
 from celery import Celery
 from celery.schedules import crontab
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rss_restart.settings.base')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rss_restart.settings3.base')
 
 app= Celery('rss_restart')
 
