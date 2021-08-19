@@ -1,4 +1,4 @@
-## Heroku production settings
+## Production settings
 
 import environ
 from rss_restart.settings.base import *
@@ -6,7 +6,7 @@ from rss_restart.settings.base import *
 env = environ.Env(
     DEBUG=(bool, False)
 )
-  
+
 DEBUG = env('DEBUG')
 
 SECRET_KEY = env('SECRET_KEY')
