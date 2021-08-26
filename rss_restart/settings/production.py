@@ -13,7 +13,7 @@ DEBUG = env('DEBUG')
 
 SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
-FORCE_SCRIPT_NAME="/rss-restart/"
+FORCE_SCRIPT_NAME="/rss-restart"
 
 DATABASES = {
     'default': env.db(),
