@@ -13,6 +13,7 @@ DEBUG = env('DEBUG')
 
 SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+STATIC_URL = '/rss-restart/static/'
 
 DATABASES = {
     'default': env.db(),
