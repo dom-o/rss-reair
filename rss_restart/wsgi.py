@@ -16,7 +16,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rss_restart.settings.production
 _application = get_wsgi_application()
 
 def application(environ, start_response):
-    # http://flask.pocoo.org/snippets/35/
+    # https://stackoverflow.com/questions/47941075/host-django-on-subfolder
     script_name = environ.get('HTTP_X_SCRIPT_NAME', '')
     if script_name:
         environ['SCRIPT_NAME'] = script_name
