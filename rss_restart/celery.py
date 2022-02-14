@@ -18,12 +18,12 @@ app.conf.beat_schedule = {
     # },
     'publish-daily': {
         'task': 'rss.tasks.publish',
-        'schedule': crontab(minute=30, hour=0),
+        'schedule': crontab(minute=38, hour=0),
         'args': (),
     },
     'clear-old-feeds-daily': {
         'task': 'rss.tasks.clear_old_feeds',
-        'schedule': crontab(minute=30, hour=0),
+        'schedule': crontab(minute=38, hour=0),
         'args': ()
     }
 }
