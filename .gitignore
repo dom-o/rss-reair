@@ -14,5 +14,6 @@ celerybeat.pid
 # Environments
 .env
 env/
+env_template
 
 notes.txt
