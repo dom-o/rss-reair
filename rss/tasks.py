@@ -4,15 +4,28 @@ from django.db.models import Q, F, Count, Max
 from rss.views import delete_age
 from datetime import timedelta, date
 
+@shared_task
+def test_task():
+    print('yoo')
+
+@shared_task
+def set_live(item_id):
+    item = RSSItem.objects.get(id=item_id)
+    item.live= True
+    item.save()
+
+@shared_task
+def get_items(feed_id, dailies):
+    items = RSSItem.objects.filter(feed=feed_id, live=False)[:dailies]
+    for item in items:
+        set_live.delay(item.id)
+
 #run daily
 @shared_task
 def publish():
     feeds = RSSFeed.objects.all()
     for feed in feeds:
-        items = RSSItem.objects.filter(feed=feed, live=False)[:feed.daily_items]
-        for item in items:
-            item.live = True
-            item.save()
+        get_items.delay(feed.id, feed.daily_items)
 
 #run daily
 @shared_task

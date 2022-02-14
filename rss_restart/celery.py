@@ -11,11 +11,11 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    # 'test-publish-biminutely': {
-    #     'task': 'rss.tasks.publish',
-    #     'schedule': 10.0,
-    #     'args': (),
-    # },
+    'test-task': {
+        'task': 'rss.tasks.test_task',
+        'schedule': 10.0,
+        'args': (),
+    },
     'publish-daily': {
         'task': 'rss.tasks.publish',
         'schedule': crontab(minute=0, hour=0),
