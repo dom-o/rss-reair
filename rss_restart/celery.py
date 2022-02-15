@@ -27,6 +27,7 @@ app.conf.beat_schedule = {
         'args': ()
     }
 }
+app.conf.timezone = 'America/New_York'
 
 @app.task(bind=True)
 def debug_task(self):
