@@ -2,7 +2,7 @@ import os
 from celery import Celery
 from celery.schedules import crontab
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rss_restart.settings.base')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rss_restart.settings.base')
 
 app= Celery('rss_restart')
 
@@ -18,12 +18,12 @@ app.conf.beat_schedule = {
     # },
     'publish-daily': {
         'task': 'rss.tasks.publish',
-        'schedule': crontab(minute=38, hour=0),
+        'schedule': crontab(minute=0, hour=0),
         'args': (),
     },
     'clear-old-feeds-daily': {
         'task': 'rss.tasks.clear_old_feeds',
-        'schedule': crontab(minute=38, hour=0),
+        'schedule': crontab(minute=0, hour=0),
         'args': ()
     }
 }

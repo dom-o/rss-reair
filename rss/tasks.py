@@ -5,8 +5,8 @@ from rss.views import delete_age
 from datetime import timedelta, date
 
 @shared_task
-def test_task():
-    print('yoo')
+def test_task(self):
+    print(f'Request: {self.request!r}')
 
 @shared_task
 def set_live(item_id):
