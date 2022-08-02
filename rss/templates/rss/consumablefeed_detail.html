@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>This is where you subscribe to <a href="{% url 'rss:feed_detail' object.feed.id %}">{{ object.feed.title }}</a>.</h1>
+<h2>This link goes into your RSS Reader: <a href="{{ object.get_rss_url }}">{{ request.get_host }}{{object.get_rss_url}}</a>.</h2>
+<p>Every day, this feed  will publish {{ object.daily_items }} link{% if object.daily_items > 1 %}s{% endif %}. A week after all the links are published, the feed gets deleted.</p>
+{% endblock %}

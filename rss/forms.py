@@ -23,5 +23,7 @@ class URLList(forms.Field):
 class RSSForm(forms.Form):
     title = forms.CharField(label='Title')
     description = forms.CharField(label='Description', required=False)
-    daily_items = forms.IntegerField(min_value=1, max_value=10, initial=1)
     item_links = URLList(widget=forms.Textarea, label='Items')
+
+class ConsumableForm(forms.Form):
+    daily_items = forms.IntegerField(min_value=1, max_value=10, initial=1)

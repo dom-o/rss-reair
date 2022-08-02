@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>This is where you browse feeds other people have made.</h1>
+<ul>
+  {% for feed in page_obj %}
+    <li>
+      {% if feed.description %}
+      <details>
+        <summary><a href="{{feed.get_absolute_url}}">{{feed.title}}</a></summary>
+          {{feed.description}}
+      </details>
+      {% else %}
+        <a href="{{feed.get_absolute_url}}">{{feed.title}}</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+<div>
+    <span>
+        {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span>
+          {{page_obj.start_index}}-{{page_obj.end_index}} of {{total_count}} feed{% if total_count > 1 %}s{% endif %}; page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
