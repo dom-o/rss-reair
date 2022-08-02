@@ -2,10 +2,24 @@
 
 {% block content %}
 <h1>
-  This is a tool for creating an RSS feed out of an arbitrary list of urls.
+  This is a tool for creating an RSS feed out of a list of urls.
 </h1>
+<h2>
+  This page is where you create a feed.
+</h2>
 <form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create">
+  <p>
+    <label for="id_title">Name your feed:</label>
+    <input type="text" name="title" required="" id="id_title">
+  </p>
+  <p>
+    <label for="id_description">Optionally describe your content (this will appear in the description section of the rss feed):</label>
+    <input type="text" name="description" id="id_description">
+  </p>
+  <p>
+    <label for="id_item_links">URLs go here:</label>
+    <textarea name="item_links" cols="40" rows="10" required="" id="id_item_links"></textarea>
+  </p>
+  <input type="submit" value="Create">
 </form>
 {% endblock %}
