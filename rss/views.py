@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import edit, detail, list, base
 from rss.models import RSSFeed, RSSItem, ConsumableFeed
-from rss.forms import RSSForm, ConsumableForm, RSSItemForm
+from rss.forms import RSSForm, ConsumableForm
 from django.contrib.syndication.views import Feed
 from django.urls import reverse
 from datetime import timedelta, date
@@ -54,7 +54,7 @@ class CreateFeedView(edit.FormView):
 
         created_feed = RSSFeed.objects.create(title=feed_title, description=feed_description, length=len(form.cleaned_data['item_links']))
 
-        for ind, link in enumerate(form.cleaned_data['item_links']):
+        for ind, link in enumerate(reversed(form.cleaned_data['item_links']) if form.cleaned_data['reverse'] else form.cleaned_data['item_links']):
             RSSItem.objects.create(feed=created_feed, content_link = link, ordinal=ind+1)
 
         return HttpResponseRedirect(reverse('rss:feed_detail', kwargs={'pk':created_feed.pk}))

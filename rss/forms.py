@@ -24,6 +24,7 @@ class RSSForm(forms.Form):
     title = forms.CharField(label='Title')
     description = forms.CharField(label='Description', required=False)
     item_links = URLList(widget=forms.Textarea, label='Items')
+    reverse = forms.BooleanField(label='Reverse', required=False)
 
 class ConsumableForm(forms.Form):
     daily_items = forms.IntegerField(min_value=1, max_value=10, initial=1)

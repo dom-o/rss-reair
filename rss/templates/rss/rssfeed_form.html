@@ -20,6 +20,12 @@
     <label for="id_item_links">URLs go here:</label>
     <textarea name="item_links" cols="40" rows="10" required="" id="id_item_links"></textarea>
   </p>
+  <p>
+    RSS feed will publish the URLs above from the first line down. You can reverse this and publish from the last line up instead.
+    <br>
+    <input type="checkbox" id="id_reverse" name="reverse">
+    <label for="id_reverse">Publish in reverse.</label>
+  </p>
   <input type="submit" value="Create">
 </form>
 {% endblock %}
