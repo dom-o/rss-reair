@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>This is {{object.title}}.</h1>
-<h2>You can get <a href="{% url 'rss:create_consumable' object.id %}">the actual RSS feed</a>.</h2>
+<h1>This is {{object.title}}</h1>
 <p>{{object.description}}</p>
-<h3>These are the URLs.</h3>
-<ul>
+<h2>You can subscribe to an <a href="{% url 'rss:create_consumable' object.id %}">RSS feed that publishes these links</a>.</h2>
+
+<h3>These are the URLs, numbered in the order they'll be published in.</h3>
+<ul style="list-style-type:decimal;">
   {% for link in page_obj %}
     <li><a href="{{link.content_link}}">{{link.content_link}}</a></li>
   {% endfor %}

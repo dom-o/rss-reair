@@ -4,12 +4,13 @@
 <h1>
   This is a tool for creating an RSS feed out of a list of urls.
 </h1>
-<h2>
-  This page is where you create a feed.
-</h2>
+<p>
+  You supply a list of URLs here; then I can generate an RSS feed for you that publishes these URLs one by one.
+<p>
+<p>This is useful for working through blog archives. Think of it as similar to re-airing a TV show. </p>
 <form method="post">{% csrf_token %}
   <p>
-    <label for="id_title">Name your feed:</label>
+    <label for="id_title">Name your list:</label>
     <input type="text" name="title" required="" id="id_title">
   </p>
   <p>
