@@ -27,19 +27,20 @@ a {
   text-decoration: none;
 }
 a:link {
-  color: #0095F8;
+  color: #FFF;
   border-bottom: .1em solid;
-  background-color: #222;
+  /* background-color: #222; */
 }
 a:visited {
-  color: #8383FF;
+  color: #b3b3b3;
 }
 a:hover, a:active {
-  color: #222;
-  background-color: #0095F8;
+  color: #121212;
+  background-color: #FFF;
 }
 a:visited:hover, a:visited:active {
-  background-color: #8383FF;
+  color: #121212;
+  background-color: #b3b3b3;
 }
 
 p {
