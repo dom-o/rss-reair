@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block errors %}
+  {{ form.non_field_errors }}
+{% endblock %}
+
+{% block content %}
+<h1>
+  This is a tool for creating an RSS feed out of a list of urls.
+</h1>
+<p>
+  You supply a list of URLs here; then I can generate an RSS feed for you that publishes these URLs one by one.
+<p>
+<p>This is useful for working through blog archives. Think of it as similar to re-airing a TV show. </p>
+<form method="post">{% csrf_token %}
+  <p>
+    {{ form.title.errors }}
+    {{ form.title.label_tag }}
+    {{ form.title }}
+  </p>
+  <p>
+    {{ form.description.errors }}
+    {{ form.description.label_tag }}
+    {{ form.description }}
+  </p>
+  <p>
+    {{ form.origin_link.errors }}
+    {{ form.origin_link.label_tag }}
+    {{ form.origin_link }}
+  </p>
+  <p>
+    {{ form.item_links.errors }}
+    {{ form.item_links.label_tag }}
+    {{ form.item_links }}
+  </p>
+  <p>
+    RSS feed will publish the URLs above from the first line down. You can reverse this and publish from the last line up instead.
+    <br>
+    {{ form.reverse.errors }}
+    {{ form.reverse }}
+    {{ form.reverse.label_tag }}
+  </p>
+  <input type="submit" value="Create">
+</form>
+{% endblock %}

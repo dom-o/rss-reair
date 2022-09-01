@@ -10,6 +10,11 @@ class RSSFeed(models.Model):
     def get_absolute_url(self):
         return reverse('rss:feed_detail', kwargs={'pk':self.pk})
 
+class DynamicFeed(RSSFeed):
+    origin_link = models.TextField(validators=[URLValidator], blank=True)
+    last_modified= models.DateField(auto_now=True)
+    active = models.BooleanField(default=True)
+
 class ConsumableFeed(models.Model):
     feed = models.ForeignKey('RSSFeed', on_delete=models.CASCADE)
     marker = models.PositiveIntegerField(default=0)
@@ -28,6 +33,6 @@ class RSSItem(models.Model):
 
     ordinal = models.PositiveIntegerField()
     feed = models.ForeignKey('RSSFeed', on_delete=models.CASCADE)
-    content_link = models.TextField(validators=[URLValidator()])
+    content_link = models.TextField(validators=[URLValidator])
     description = models.TextField(blank=True)
     title = models.TextField(blank=True)

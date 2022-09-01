@@ -1,11 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import edit, detail, list, base
-from rss.models import RSSFeed, RSSItem, ConsumableFeed
-from rss.forms import RSSForm, ConsumableForm
+from rss.models import RSSFeed, RSSItem, ConsumableFeed, DynamicFeed
+from rss.forms import RSSForm, ConsumableForm, DynamicForm
 from django.contrib.syndication.views import Feed
 from django.urls import reverse
 from datetime import timedelta, date
 from django.core.paginator import Paginator
+import feedparser
 
 # Create your views here.
 def index(request):
@@ -27,7 +28,6 @@ def index(request):
 #         for ind, link in enumerate(form.cleaned_data['item_links']):
 #             ord+=1
 #             RSSItem.objects.create(feed=created_feed, content_link = link, title=form.cleaned_data['titles'][ind], description=form.cleaned_data['desc'][ind], ordinal=ord)
-
 
 class CreateConsumableView(edit.FormView):
     template_name = 'rss/consumable_form.html'
@@ -58,6 +58,14 @@ class CreateFeedView(edit.FormView):
             RSSItem.objects.create(feed=created_feed, content_link = link, ordinal=ind+1)
 
         return HttpResponseRedirect(reverse('rss:feed_detail', kwargs={'pk':created_feed.pk}))
+
+class CreateDynamicView(CreateFeedView):
+    template_name = 'rss/dynamicfeed_form.html'
+    form_class = DynamicForm
+
+    #form_valid should be the same
+    #cleaning the form to make sure the origin link is valid should be only difference
+
 
 class ConsumableDetailView(detail.DetailView):
     model = ConsumableFeed
