@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block errors %}
+  {{ form.non_field_errors }}
+{% endblock %}
 
 {% block content %}
 <h1>
@@ -10,22 +13,26 @@
 <p>This is useful for working through blog archives. Think of it as similar to re-airing a TV show. </p>
 <form method="post">{% csrf_token %}
   <p>
-    <label for="id_title">Name your list:</label>
-    <input type="text" name="title" required="" id="id_title">
+    {{ form.title.errors }}
+    {{ form.title.label_tag }}
+    {{ form.title }}
   </p>
   <p>
-    <label for="id_description">Optionally describe your content (this will appear in the description section of the rss feed):</label>
-    <input type="text" name="description" id="id_description">
+    {{ form.description.errors }}
+    {{ form.description.label_tag }}
+    {{ form.description }}
   </p>
   <p>
-    <label for="id_item_links">URLs go here:</label>
-    <textarea name="item_links" cols="40" rows="10" required="" id="id_item_links"></textarea>
+    {{ form.item_links.errors }}
+    {{ form.item_links.label_tag }}
+    {{ form.item_links }}
   </p>
   <p>
     RSS feed will publish the URLs above from the first line down. You can reverse this and publish from the last line up instead.
     <br>
-    <input type="checkbox" id="id_reverse" name="reverse">
-    <label for="id_reverse">Publish in reverse.</label>
+    {{ form.reverse.errors }}
+    {{ form.reverse }}
+    {{ form.reverse.label_tag }}
   </p>
   <input type="submit" value="Create">
 </form>
